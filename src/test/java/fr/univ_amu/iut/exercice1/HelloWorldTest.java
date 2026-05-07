@@ -2,7 +2,6 @@ package fr.univ_amu.iut.exercice1;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -25,13 +24,11 @@ class HelloWorldTest {
 
   // ========= Salutation par défaut =========
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saluer_sans_nom_retourne_hello_world() {
     assertThat(HelloWorld.saluer(null)).isEqualTo("Hello, World!");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saluer_chaine_vide_retourne_hello_world() {
     assertThat(HelloWorld.saluer("")).isEqualTo("Hello, World!");
@@ -39,19 +36,16 @@ class HelloWorldTest {
 
   // ========= Triangulation : plusieurs noms =========
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saluer_alice_retourne_hello_alice() {
     assertThat(HelloWorld.saluer("Alice")).isEqualTo("Hello, Alice!");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saluer_bob_retourne_hello_bob() {
     assertThat(HelloWorld.saluer("Bob")).isEqualTo("Hello, Bob!");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saluer_nom_une_lettre_retourne_hello_lettre() { // Force à ne pas confondre "nom court" avec
     // "chaîne vide".
@@ -60,13 +54,11 @@ class HelloWorldTest {
 
   // ========= Régression : noms plus exotiques =========
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saluer_eric_retourne_hello_eric() {
     assertThat(HelloWorld.saluer("Éric")).isEqualTo("Hello, Éric!");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void saluer_jean_dupont_retourne_hello_jean_dupont() {
     assertThat(HelloWorld.saluer("Jean Dupont")).isEqualTo("Hello, Jean Dupont!");
