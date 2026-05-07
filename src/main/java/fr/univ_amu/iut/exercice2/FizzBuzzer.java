@@ -28,7 +28,7 @@ public class FizzBuzzer {
     // return par défaut. Activez les tests dans l'ordre : 1 et 2 passent
     // directement (fake it via le return final), 3 demande d'introduire
     // un premier cas, etc.
-    if (n % 3 == 0 && n % 5 == 0) return "FizzBuzz";
+    if (n % 15 == 0) return "FizzBuzz";
     if (n % 3 == 0) return "Fizz";
     if (n % 5 == 0) return "Buzz";
     return String.valueOf(n);
@@ -45,19 +45,7 @@ public class FizzBuzzer {
     // TODO exercice 2 : remplir sequence[i] en réutilisant fizzBuzz(i+1).
     // Ne dupliquez pas la logique : appelez fizzBuzz !
     for (int i = 1; i < n + 1; i += 1) {
-      if (i % 3 == 0 && i % 5 == 0) {
-        sequence[i - 1] = "FizzBuzz";
-        continue;
-      }
-      if (i % 3 == 0) {
-        sequence[i - 1] = "Fizz";
-        continue;
-      }
-      if (i % 5 == 0) {
-        sequence[i - 1] = "Buzz";
-        continue;
-      }
-      sequence[i - 1] = String.valueOf(i);
+      sequence[i - 1] = fizzBuzz(i);
     }
     return sequence;
   }
