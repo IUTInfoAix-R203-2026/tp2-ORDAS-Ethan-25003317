@@ -35,18 +35,49 @@ public class ConvertisseurDeNombreRomain {
    *     interdite
    */
   public int enNombreArabe(String chiffreRomain) {
-    int total = 0;
-    // TODO exercice 3 : remplir total en parcourant la chaîne.
-    //
-    // Activez les tests un par un. Commencez par "I" = 1 (fake it en
-    // retournant 1 en dur), puis "II" = 2 et "III" = 3 (boucle de comptage
-    // d'occurrences de I), puis "V" = 5 (switch sur le symbole).
-    //
-    // Quand vous arrivez à "IV" = 4 : extrayez une méthode valeurDe(char)
-    // pour factoriser, puis ajoutez la logique de soustraction.
-    //
-    // Pour les exceptions : une soustraction est valide seulement pour
-    // I avant V/X, X avant L/C, C avant D/M. Tout le reste est invalide.
+    int total = valeurDe(chiffreRomain.charAt(0));
+
+    for (int i = 1; i < chiffreRomain.length(); i++) {
+      char chiffreRomainCourant = chiffreRomain.charAt(i);
+      char chiffreRomainPrecedent = chiffreRomain.charAt(i - 1);
+      if (estCasDeSoustraction(chiffreRomainCourant, chiffreRomainPrecedent)) {
+        validerSoustraction(chiffreRomainCourant, chiffreRomainPrecedent);
+        total -= 2 * valeurDe(chiffreRomainPrecedent);
+      }
+      total += valeurDe(chiffreRomainCourant);
+    }
     return total;
+  }
+
+  private void validerSoustraction(char chiffreRomainCourant, char chiffreRomainPrecedent) {
+    if (!estCasDeSoustractionValide(chiffreRomainCourant, chiffreRomainPrecedent))
+      throw new IllegalArgumentException();
+  }
+
+  private boolean estCasDeSoustractionValide(
+      char chiffreRomainCourant, char chiffreRomainPrecedent) {
+    return chiffreRomainPrecedent == 'I' && chiffreRomainCourant == 'V'
+        || chiffreRomainPrecedent == 'I' && chiffreRomainCourant == 'X'
+        || chiffreRomainPrecedent == 'X' && chiffreRomainCourant == 'L'
+        || chiffreRomainPrecedent == 'X' && chiffreRomainCourant == 'C'
+        || chiffreRomainPrecedent == 'C' && chiffreRomainCourant == 'D'
+        || chiffreRomainPrecedent == 'C' && chiffreRomainCourant == 'M';
+  }
+
+  private boolean estCasDeSoustraction(char chiffreRomainCourant, char chiffreRomainPrecedent) {
+    return valeurDe(chiffreRomainPrecedent) < valeurDe(chiffreRomainCourant);
+  }
+
+  private int valeurDe(char chiffreRomain) {
+    return switch (chiffreRomain) {
+      case 'I' -> 1;
+      case 'V' -> 5;
+      case 'X' -> 10;
+      case 'L' -> 50;
+      case 'C' -> 100;
+      case 'D' -> 500;
+      case 'M' -> 1000;
+      default -> throw new IllegalArgumentException();
+    };
   }
 }
